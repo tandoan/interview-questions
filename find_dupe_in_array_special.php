@@ -2,6 +2,15 @@
 /**
 	Given an array of size N, which contains only elements with values of [1..N-1],
 	return a value in the array that is contained more than once
+
+	With lots of values, I debate which is better: the n^2 one, or slightly better than n^2 binary search method.
+	Possible bug when computing how to split the search due to overflow if the size is very large.
+	
+	Also calculating the split is hard:
+
+		"Knuth points out that while the first binary search was published in 1946, the first published binary search without bugs did not appear until 1962.""
+
+		– Jon Bentley, Programming Pearls (1st edition), pp. 35-36.
 */
 
 
