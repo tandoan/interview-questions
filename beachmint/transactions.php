@@ -10,16 +10,7 @@
 He doesn't have to wrap PDO classes in a class.
 Just create a php block that handles a successful transaction and an unsuccessful one.
 */
-PHPUnit_Framework_Error_Warning::$enabled = FALSE;
-PHPUnit_Framework_Error_Notice::$enabled = FALSE;
 
-class mockPDO extends PDO{
-    public function __construct (){}
-}
-
-class mockObj{
-
-}
 
 function executeTransaction($db, $queries = array()){
 	try {
