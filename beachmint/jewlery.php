@@ -9,11 +9,6 @@
 
   "This is assuming that not all jewlery is washable.  If it is, I'd throw method wash in the Jewlery abstract class"
 */
-
-
-/**
-	A little more complex than having classes implement an abstract wash method
-*/
 interface iWashMethod {
 	public function wash();
 }
