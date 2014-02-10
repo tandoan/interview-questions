@@ -11,38 +11,104 @@
 */
 
 
+/**
+	A little more complex than having classes implement an abstract wash method
+*/
+interface iWashMethod {
+	public function wash();
+}
 
-abstract class Jewlery {
+class SoakInBakingSoda implements iWashMethod {
+	public function wash() {
+		//soak it
+	}
+}
+class NoWash implements iWashMethod {
+	public function wash() {
+		//no washing possible
+	}
+}
+class ScrubHard implements iWashMethod {
+	public function wash() {
+		//scrub a dub dub
+	}
+}
+
+
+class Jewlery {
 	private $size;
 	private $weight;
 	private $price;
 	private $color;
 
-	private $washBehavior;
+	private $washMethod;
 
-	public function wash(){
-		$this->washBehavior->wash();
+	public function __construct($size, $weight, $price, $color, $washMethod) {
+		$this->size = $size;
+		$this->weight = $weight;
+		$this->price = $price;
+		$this->color = $color;
+		$this->washMethod = $washMethod;
+	}
+
+	public function doWash() {
+		$this->washMethod->wash();
+	}
+
+	public function getSize() {
+		return $this->size;
+	}
+	public function setSize($s) {
+		$this->size = $s;
+	}
+
+	public function getWeight() {
+		return $this->weight;
+	}
+	public function setWeight($w) {
+		$this->weight = $w;
+	}
+
+	public function getPrice() {
+		return $this->price;
+	}
+
+	public function setPrice($p) {
+		$this->price = $p;
+	}
+
+	public function getColor() {
+		return $this->color;
+	}
+	public function setColor($c) {
+		$this->color = $c;
+	}
+
+	public function getWashMethod() {
+		return $this->washMethod;
+	}
+	public function setWashMethod($w) {
+		$this->washMethod = $w;
 	}
 }
 
-interface WashBehavior{
-	public function wash();
-}
+class Ring extends Jewlery {}
 
-class RingWash implements WashBehavior(){
-	public function wash(){
-		//dunk in a glass of soda
+class Necklace extends Jewlery {}
+
+class Bracelete extends Jewlery {}
+
+class JewleryFactory {
+	public function createLargeRedRing() {
+		$o = new Ring('L', '1.5g', '2.50', 'RED', new ScrubHard());
+		return $o;
+	}
+
+	public function createFeatherNecklace() {
+		$o = new Necklace('L', '2.5g', '10.99', 'GOLD', new NoWash());
+		return $o;
 	}
 }
 
-class Ring extends Jewlery{
-	public function __construct($washBehavior){
-		$this->washBehavior = $washBehavior;
-	}
-}
-
-class JewleryFactory{
-	public function createRing(){
-		$ring = new Ring(new RingWash());
-	}
-}
+$ring = JewleryFactory::createLargeRedRing();
+$necklace = JewleryFactory::createFeatherNecklace();
